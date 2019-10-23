@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class RocketShip : MonoBehaviour {
     Rigidbody rigidBody;
+    AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
         rigidBody = GetComponent<Rigidbody>();    // get access to the rigidbody component
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -18,9 +20,14 @@ public class RocketShip : MonoBehaviour {
 
     private void ProcessInput()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
+        if (Input.GetKey(KeyCode.Space)) { 
             rigidBody.AddRelativeForce(Vector3.up);   // use relative force so when rocket tilts force tilts as well
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+        }
+        else
+        {
+            audioSource.Stop();
         }
         if (Input.GetKey(KeyCode.A)) 
         {
