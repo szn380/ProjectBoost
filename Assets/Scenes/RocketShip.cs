@@ -21,6 +21,8 @@ public class RocketShip : MonoBehaviour {
 
     private void Rotate()
     {
+        rigidBody.freezeRotation = true;  // take manual control of rotation
+        
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.forward);
@@ -29,6 +31,8 @@ public class RocketShip : MonoBehaviour {
         {
             transform.Rotate(-Vector3.forward);
         }
+
+        rigidBody.freezeRotation = false;  // resume physics control
     }
 
     private void Thrust()
