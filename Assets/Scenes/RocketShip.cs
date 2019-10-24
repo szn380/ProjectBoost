@@ -15,12 +15,26 @@ public class RocketShip : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        ProcessInput();
+        Thrust();
+        Rotate();
 	}
 
-    private void ProcessInput()
+    private void Rotate()
     {
-        if (Input.GetKey(KeyCode.Space)) { 
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Rotate(Vector3.forward);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(-Vector3.forward);
+        }
+    }
+
+    private void Thrust()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
             rigidBody.AddRelativeForce(Vector3.up);   // use relative force so when rocket tilts force tilts as well
             if (!audioSource.isPlaying)
                 audioSource.Play();
@@ -28,14 +42,6 @@ public class RocketShip : MonoBehaviour {
         else
         {
             audioSource.Stop();
-        }
-        if (Input.GetKey(KeyCode.A)) 
-        {
-            transform.Rotate(Vector3.forward);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(-Vector3.forward);
         }
     }
 }
