@@ -6,9 +6,11 @@ using UnityEngine;
 public class RocketShip : MonoBehaviour {
     Rigidbody rigidBody;
     AudioSource audioSource;
+    [SerializeField] float rcsThrust = 100f;
+    [SerializeField] float engineThrust = 100f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         rigidBody = GetComponent<Rigidbody>();    // get access to the rigidbody component
         audioSource = GetComponent<AudioSource>();
 	}
@@ -22,14 +24,15 @@ public class RocketShip : MonoBehaviour {
     private void Rotate()
     {
         rigidBody.freezeRotation = true;  // take manual control of rotation
-        
+        float rotaionThisFrame = rcsThrust * Time.deltaTime;
+
         if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(Vector3.forward);
+        {   
+            transform.Rotate(Vector3.forward * rotaionThisFrame);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(-Vector3.forward);
+            transform.Rotate(-Vector3.forward * rotaionThisFrame);
         }
 
         rigidBody.freezeRotation = false;  // resume physics control
@@ -37,9 +40,11 @@ public class RocketShip : MonoBehaviour {
 
     private void Thrust()
     {
+        float thrustThisFrame = engineThrust * Time.deltaTime;
+
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidBody.AddRelativeForce(Vector3.up);   // use relative force so when rocket tilts force tilts as well
+            rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);   // use relative force so when rocket tilts force tilts as well
             if (!audioSource.isPlaying)
                 audioSource.Play();
         }
