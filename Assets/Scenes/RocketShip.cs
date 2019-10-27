@@ -38,6 +38,22 @@ public class RocketShip : MonoBehaviour {
         rigidBody.freezeRotation = false;  // resume physics control
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":    // do nothing
+                print("Harmless Collision");
+                break;
+            case "Fuel":   // Dead
+                print("Fuel Collision");
+                break;
+            default:
+                print("Dead Collision");
+                break;
+        }
+    }
+
     private void Thrust()
     {
         float thrustThisFrame = engineThrust * Time.deltaTime;
