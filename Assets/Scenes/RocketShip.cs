@@ -8,6 +8,7 @@ public class RocketShip : MonoBehaviour {
     AudioSource audioSource;
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float engineThrust = 100f;
+    public Transform RocketShipExplosion;
 
     // Use this for initialization
     void Start () {
@@ -43,13 +44,15 @@ public class RocketShip : MonoBehaviour {
         switch (collision.gameObject.tag)
         {
             case "Friendly":    // do nothing
-                print("Harmless Collision");
+                print("Rocket Harmless Collision");
                 break;
             case "Fuel":   // Dead
-                print("Fuel Collision");
+                print("Rocket Fuel Collision");
                 break;
             default:
-                print("Dead Collision");
+                print("Rocket Dead Collision");
+                Instantiate(RocketShipExplosion, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+                Destroy(gameObject);
                 break;
         }
     }
