@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RocketShip : MonoBehaviour {
     Rigidbody rigidBody;
@@ -9,6 +10,8 @@ public class RocketShip : MonoBehaviour {
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float engineThrust = 100f;
     public Transform RocketShipExplosion;
+    int loadSceneDelay = 0;
+    public bool shipDestroyed = false; 
 
     // Use this for initialization
     void Start () {
@@ -46,8 +49,9 @@ public class RocketShip : MonoBehaviour {
             case "Friendly":    // do nothing
                 print("Rocket Harmless Collision");
                 break;
-            case "Fuel":   // Dead
-                print("Rocket Fuel Collision");
+            case "Finish":    // do nothing
+                print("Rocket Finishes Level");
+                SceneManager.LoadScene(1);
                 break;
             default:
                 print("Rocket Dead Collision");
