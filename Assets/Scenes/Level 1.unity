@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: b072ad49f6afff24a8b60d3ff554685c,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -126,7 +127,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4724403577773354, guid: df95aa4a52b2991449d52d33e82c3db9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 16
+      value: 15.5
       objectReference: {fileID: 0}
     - target: {fileID: 4724403577773354, guid: df95aa4a52b2991449d52d33e82c3db9, type: 2}
       propertyPath: m_LocalPosition.z
@@ -266,6 +267,16 @@ Prefab:
     - target: {fileID: 4256983576782816, guid: 04fcf9ad3e9502042ad4c967132e8430, type: 2}
       propertyPath: m_LocalScale.x
       value: 172.3722
+      objectReference: {fileID: 0}
+    - target: {fileID: 82264652098917094, guid: 04fcf9ad3e9502042ad4c967132e8430,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 596a8b7e52375f745886a85ca6b1e5e8, type: 3}
+    - target: {fileID: 82264652098917094, guid: 04fcf9ad3e9502042ad4c967132e8430,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04fcf9ad3e9502042ad4c967132e8430, type: 2}
@@ -489,7 +500,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4724403577773354, guid: df95aa4a52b2991449d52d33e82c3db9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 27.5
+      value: 26.8
       objectReference: {fileID: 0}
     - target: {fileID: 4724403577773354, guid: df95aa4a52b2991449d52d33e82c3db9, type: 2}
       propertyPath: m_LocalPosition.z
@@ -778,6 +789,22 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d80474d83aa5047891c5d92159c910, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1886631289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1730440949763542, guid: 04fcf9ad3e9502042ad4c967132e8430,
+    type: 2}
+  m_PrefabInternal: {fileID: 580038524}
+--- !u!114 &1886631295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1886631289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85321177c5be254ab8eff407c27b977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2083093013
 Prefab:
   m_ObjectHideFlags: 0

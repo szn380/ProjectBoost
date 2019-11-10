@@ -13,6 +13,9 @@ public class RocketShip : MonoBehaviour {
     int loadSceneDelay = 0;
     public bool shipDestroyed = false; 
 
+    enum State { Alive, Dying, Transcending }
+    State state = State.Alive;
+
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();    // get access to the rigidbody component
@@ -20,9 +23,13 @@ public class RocketShip : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        Thrust();
-        Rotate();
+	void Update () 
+    {
+        if (state == State.Alive)
+        {
+            Thrust();
+            Rotate();
+        }
 	}
 
     private void Rotate()
@@ -44,6 +51,11 @@ public class RocketShip : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+
+        if (state != State.Alive)
+        {
+            return;
+        }
         switch (collision.gameObject.tag)
         {
             case "Friendly":    // do nothing
@@ -51,14 +63,30 @@ public class RocketShip : MonoBehaviour {
                 break;
             case "Finish":    // do nothing
                 print("Rocket Finishes Level");
-                SceneManager.LoadScene(1);
+                state = State.Transcending;
+                Invoke("LoadNextScene", 1f);  // delay starting this routine
                 break;
             default:
                 print("Rocket Dead Collision");
-                Instantiate(RocketShipExplosion, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
-                Destroy(gameObject);
+                if (state != State.Dying)
+                {
+                    Instantiate(RocketShipExplosion, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+                    Invoke("LoadStartLevel", 1f);
+                    Destroy(gameObject);
+                }
+                state = State.Dying;
                 break;
         }
+    }
+
+    private void LoadStartLevel()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(1);  // todo: allow for more than two levels
     }
 
     private void Thrust()
