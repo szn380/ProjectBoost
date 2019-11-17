@@ -9,6 +9,9 @@ public class RocketShip : MonoBehaviour {
     AudioSource audioSource;
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float engineThrust = 100f;
+    [SerializeField] AudioClip mainEngine;
+    [SerializeField] AudioClip finishLevel;
+
     public Transform RocketShipExplosion;
     int loadSceneDelay = 0;
     public bool shipDestroyed = false; 
@@ -27,12 +30,12 @@ public class RocketShip : MonoBehaviour {
     {
         if (state == State.Alive)
         {
-            Thrust();
-            Rotate();
+            RespondToThrustInput();
+            RespondToRotateInput();
         }
 	}
 
-    private void Rotate()
+    private void RespondToRotateInput()
     {
         rigidBody.freezeRotation = true;  // take manual control of rotation
         float rotaionThisFrame = rcsThrust * Time.deltaTime;
@@ -62,9 +65,7 @@ public class RocketShip : MonoBehaviour {
                 print("Rocket Harmless Collision");
                 break;
             case "Finish":    // do nothing
-                print("Rocket Finishes Level");
-                state = State.Transcending;
-                Invoke("LoadNextScene", 1f);  // delay starting this routine
+                finishLevelSequence();
                 break;
             default:
                 print("Rocket Dead Collision");
@@ -79,6 +80,14 @@ public class RocketShip : MonoBehaviour {
         }
     }
 
+    private void finishLevelSequence()
+    {
+        state = State.Transcending;
+        audioSource.Stop();
+        audioSource.PlayOneShot(finishLevel);
+        Invoke("LoadNextScene", 1f);  // delay starting this routine
+    }
+
     private void LoadStartLevel()
     {
         SceneManager.LoadScene(0);
@@ -89,19 +98,25 @@ public class RocketShip : MonoBehaviour {
         SceneManager.LoadScene(1);  // todo: allow for more than two levels
     }
 
-    private void Thrust()
+    private void RespondToThrustInput()
     {
         float thrustThisFrame = engineThrust * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);   // use relative force so when rocket tilts force tilts as well
-            if (!audioSource.isPlaying)
-                audioSource.Play();
+            ApplyThrust(thrustThisFrame);
         }
         else
         {
             audioSource.Stop();
         }
+    }
+
+    private void ApplyThrust(float thrustThisFrame)
+    {
+        rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);   // use relative force so when rocket tilts force tilts as well
+        if (!audioSource.isPlaying)
+            // audioSource.Play();   // play default audio source
+            audioSource.PlayOneShot(mainEngine);
     }
 }
