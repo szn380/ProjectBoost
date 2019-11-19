@@ -6,9 +6,11 @@ public class DeadShip : MonoBehaviour {
     public int counter = 30;
     public Transform RocketShipDead;
 
+    [SerializeField] ParticleSystem deathParticles;
+
     // Use this for initialization
     void Start () {
-		
+        deathParticles.Play();
 	}
 	
 	// Update is called once per frame

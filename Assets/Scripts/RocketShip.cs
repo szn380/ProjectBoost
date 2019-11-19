@@ -12,6 +12,10 @@ public class RocketShip : MonoBehaviour {
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip finishLevel;
 
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem finishLevelParticles;
+
+
     public Transform RocketShipExplosion;
     int loadSceneDelay = 0;
     public bool shipDestroyed = false; 
@@ -66,6 +70,7 @@ public class RocketShip : MonoBehaviour {
                 break;
             case "Finish":    // do nothing
                 finishLevelSequence();
+                finishLevelParticles.Play();
                 break;
             default:
                 print("Rocket Dead Collision");
@@ -109,6 +114,7 @@ public class RocketShip : MonoBehaviour {
         else
         {
             audioSource.Stop();
+            mainEngineParticles.Stop();
         }
     }
 
@@ -116,7 +122,10 @@ public class RocketShip : MonoBehaviour {
     {
         rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);   // use relative force so when rocket tilts force tilts as well
         if (!audioSource.isPlaying)
+        {
             // audioSource.Play();   // play default audio source
             audioSource.PlayOneShot(mainEngine);
+        }
+        mainEngineParticles.Play();
     }
 }
