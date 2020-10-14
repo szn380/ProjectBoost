@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Vertical movement controled by physics and applied forces (Rigidbody)
+// Rotation controlled by direct assignment of rotation (transform values)
+
 public class RocketShip : MonoBehaviour {
     Rigidbody rigidBody;
     AudioSource audioSource;
