@@ -5125,7 +5125,6 @@ MonoBehaviour:
   finishLevel: {fileID: 8300000, guid: 1f5c855e320859348bcf9042154a506d, type: 3}
   mainEngineParticles: {fileID: 1255690475}
   finishLevelParticles: {fileID: 949923303}
-  deathParticles: {fileID: 137929443}
   RocketShipExplosion: {fileID: 4500701902536868, guid: 6e0f92a138eed0645997b537bd15942e,
     type: 2}
   shipDestroyed: 0
@@ -14724,15 +14723,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4930428103295298, guid: 1dcd5b62a7c82764aaf1999872e946c9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.5795226
+      value: -1.214138
       objectReference: {fileID: 0}
     - target: {fileID: 4930428103295298, guid: 1dcd5b62a7c82764aaf1999872e946c9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 27.391136
+      value: 29.874859
       objectReference: {fileID: 0}
     - target: {fileID: 4930428103295298, guid: 1dcd5b62a7c82764aaf1999872e946c9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -44.95868
+      value: -52.609478
       objectReference: {fileID: 0}
     - target: {fileID: 4930428103295298, guid: 1dcd5b62a7c82764aaf1999872e946c9, type: 2}
       propertyPath: m_LocalRotation.x

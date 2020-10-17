@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Vertical movement controled by physics and applied forces (Rigidbody)
+// Vertical  and lateral movement controled by physics and applied forces (Rigidbody)
+//    Z axis movement frozen using inspector rigidbody constraints; only move on X & Y plane
 // Rotation controlled by direct assignment of rotation (transform values)
+//    X & Y rotation frozen using inspector rigidbody constraints; only rotate around Z axis
 
 public class RocketShip : MonoBehaviour {
     Rigidbody rigidBody;
@@ -66,10 +68,10 @@ public class RocketShip : MonoBehaviour {
         {
             return;
         }
-        switch (collision.gameObject.tag)
+        switch (collision.gameObject.tag)   // gameObject is what we are colliding with
         {
             case "Friendly":    // do nothing
-                print("Rocket Harmless Collision");
+                print("Rocket Harmless Collision"); 
                 break;
             case "Finish":    // do nothing
                 finishLevelSequence();
