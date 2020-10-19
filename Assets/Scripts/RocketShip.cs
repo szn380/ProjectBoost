@@ -15,6 +15,7 @@ public class RocketShip : MonoBehaviour {
 
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float engineThrust = 100f;
+    [SerializeField] float levelLoadDelay = 2f;
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip finishLevel;
 
@@ -25,7 +26,7 @@ public class RocketShip : MonoBehaviour {
     public Transform RocketShipExplosion;
     int loadSceneDelay = 0;
     int sceneCounter = 0;
-    int sceneMax = 5;  // number of last scene/level
+    int sceneMax = 7;  // number of last scene/level
     public bool shipDestroyed = false; 
 
     enum State { Alive, Dying, Transcending }
@@ -81,7 +82,7 @@ public class RocketShip : MonoBehaviour {
                 if (state != State.Dying)
                 {
                     Instantiate(RocketShipExplosion, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
-                    Invoke("LoadStartLevel", 1f);
+                    Invoke("LoadStartLevel", levelLoadDelay);
                     Destroy(gameObject);
                 }
                 state = State.Dying;
@@ -94,7 +95,7 @@ public class RocketShip : MonoBehaviour {
         state = State.Transcending;
         audioSource.Stop();
         audioSource.PlayOneShot(finishLevel);
-        Invoke("LoadNextScene", 1f);  // delay starting this routine
+        Invoke("LoadNextScene", levelLoadDelay);  // delay starting this routine
         finishLevelParticles.Play();
     }
 

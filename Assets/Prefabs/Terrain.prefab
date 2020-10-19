@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23798426214020678}
   - component: {fileID: 65876332358851598}
   - component: {fileID: 82264652098917094}
+  - component: {fileID: 114121877398456842}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -58,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: b4919c7fadcd6384ea57be7e64afa94f, type: 2}
+  - {fileID: 2100000, guid: 1e9457def11cba74cbd14fcda414e04d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,8 +107,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 596a8b7e52375f745886a85ca6b1e5e8, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -192,3 +193,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114121877398456842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1730440949763542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85321177c5be254ab8eff407c27b977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
