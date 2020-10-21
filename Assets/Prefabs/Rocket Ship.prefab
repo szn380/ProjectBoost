@@ -278,7 +278,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e96a1fb1b1d5a4a4d95ff4934db6cf39, type: 2}
+  - {fileID: 2100000, guid: 959ff3527896ec84091ec387c7b1808c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,7 +348,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e96a1fb1b1d5a4a4d95ff4934db6cf39, type: 2}
+  - {fileID: 2100000, guid: 959ff3527896ec84091ec387c7b1808c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -590,13 +590,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rcsThrust: 100
   engineThrust: 1000
+  levelLoadDelay: 2
   mainEngine: {fileID: 8300000, guid: 9c944a4db092f704bad8d8979b7721c6, type: 3}
   finishLevel: {fileID: 8300000, guid: 1f5c855e320859348bcf9042154a506d, type: 3}
   mainEngineParticles: {fileID: 198573292202751774}
   finishLevelParticles: {fileID: 198888013377596486}
   RocketShipExplosion: {fileID: 4500701902536868, guid: 6e0f92a138eed0645997b537bd15942e,
     type: 2}
-  shipDestroyed: 1
+  shipDestroyed: 0
 --- !u!135 &135835336540832838
 SphereCollider:
   m_ObjectHideFlags: 1

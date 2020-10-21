@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 // Vertical  and lateral movement controled by physics and applied forces (Rigidbody)
@@ -15,7 +16,7 @@ public class RocketShip : MonoBehaviour {
 
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float engineThrust = 100f;
-    [SerializeField] float levelLoadDelay = 2f;
+    [SerializeField] float levelLoadDelay = 1f;
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip finishLevel;
 
@@ -24,9 +25,8 @@ public class RocketShip : MonoBehaviour {
 
 
     public Transform RocketShipExplosion;
-    int loadSceneDelay = 0;
     int sceneCounter = 0;
-    int sceneMax = 7;  // number of last scene/level
+    int sceneMax = 8;  // number of last scene/level
     public bool shipDestroyed = false; 
 
     enum State { Alive, Dying, Transcending }
@@ -79,10 +79,9 @@ public class RocketShip : MonoBehaviour {
                 finishLevelSequence();
                 break;
             default:
-                if (state != State.Dying)
+                if (state == State.Alive)
                 {
                     Instantiate(RocketShipExplosion, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
-                    Invoke("LoadStartLevel", levelLoadDelay);
                     Destroy(gameObject);
                 }
                 state = State.Dying;
@@ -92,16 +91,11 @@ public class RocketShip : MonoBehaviour {
 
     private void finishLevelSequence()
     {
-        state = State.Transcending;
+        state = State.Transcending; 
         audioSource.Stop();
         audioSource.PlayOneShot(finishLevel);
         Invoke("LoadNextScene", levelLoadDelay);  // delay starting this routine
         finishLevelParticles.Play();
-    }
-
-    private void LoadStartLevel()
-    {
-        SceneManager.LoadScene(0);
     }
 
     private void LoadNextScene()
