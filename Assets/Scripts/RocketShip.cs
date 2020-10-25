@@ -17,17 +17,16 @@ public class RocketShip : MonoBehaviour {
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float engineThrust = 100f;
     [SerializeField] float levelLoadDelay = 1f;
-    [SerializeField] AudioClip mainEngine;
-    [SerializeField] AudioClip finishLevel;
+    [SerializeField] AudioClip mainEngineSound;
+    [SerializeField] AudioClip finishLevelSound;
 
     [SerializeField] ParticleSystem mainEngineParticles;
     [SerializeField] ParticleSystem finishLevelParticles;
 
 
     public Transform RocketShipExplosion;
-    int sceneCounter = 0;
-    int sceneMax = 8;  // number of last scene/level
-    public bool shipDestroyed = false; 
+    public bool shipDestroyed = false;
+    bool collisionMode = true;       // set to true if collisions should be recognized / processed
 
     enum State { Alive, Dying, Transcending }
     State state = State.Alive;
@@ -43,14 +42,31 @@ public class RocketShip : MonoBehaviour {
     {
         if (state == State.Alive)
         {
+            if (Debug.isDebugBuild)
+            {
+                respondToDebugKeys();
+            }
             RespondToThrustInput();
             RespondToRotateInput();
         }
-	}
+    }
+
+    private void respondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L))  // load next level
+        {
+            LoadNextScene();
+        }
+        if (Input.GetKeyDown(KeyCode.C))   // disable / enable debug code
+        {
+            collisionMode = !collisionMode;
+        }
+    }
 
     private void RespondToRotateInput()
     {
-        rigidBody.freezeRotation = true;  // take manual control of rotation
+        // rigidBody.freezeRotation = true;  // take manual control of rotation
+        rigidBody.angularVelocity = Vector3.zero;  // remove rotation due to physics
         float rotaionThisFrame = rcsThrust * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.A))
@@ -62,30 +78,29 @@ public class RocketShip : MonoBehaviour {
             transform.Rotate(-Vector3.forward * rotaionThisFrame);
         }
 
-        rigidBody.freezeRotation = false;  // resume physics control
+        // rigidBody.freezeRotation = false;  // resume physics control
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (state != State.Alive)
+        if (state == State.Alive && collisionMode)
         {
-            return;
-        }
-        switch (collision.gameObject.tag)   // gameObject is what we are colliding with
-        {
-            case "Friendly":    // do nothing
-                break;
-            case "Finish":    // do nothing
-                finishLevelSequence();
-                break;
-            default:
-                if (state == State.Alive)
-                {
-                    Instantiate(RocketShipExplosion, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
-                    Destroy(gameObject);
-                }
-                state = State.Dying;
-                break;
+            switch (collision.gameObject.tag)   // gameObject is what we are colliding with
+            {
+                case "Friendly":    // do nothing
+                    break;
+                case "Finish":    // do nothing
+                    finishLevelSequence();
+                    break;
+                default:
+                    if (state == State.Alive)
+                    {
+                        Instantiate(RocketShipExplosion, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
+                        Destroy(gameObject);
+                    }
+                    state = State.Dying;
+                    break;
+            }
         }
     }
 
@@ -93,16 +108,17 @@ public class RocketShip : MonoBehaviour {
     {
         state = State.Transcending; 
         audioSource.Stop();
-        audioSource.PlayOneShot(finishLevel);
+        audioSource.PlayOneShot(finishLevelSound);
         Invoke("LoadNextScene", levelLoadDelay);  // delay starting this routine
         finishLevelParticles.Play();
     }
 
     private void LoadNextScene()
     {
-        sceneCounter = SceneManager.GetActiveScene().buildIndex;
+        int sceneCounter = SceneManager.GetActiveScene().buildIndex;
+        int sceneMax = SceneManager.sceneCountInBuildSettings;
         sceneCounter++;
-        if (sceneCounter >= sceneMax) { sceneCounter = sceneMax;  }
+        if (sceneCounter >= sceneMax) { sceneCounter = 0;  }
         SceneManager.LoadScene(sceneCounter);  // todo: allow for more than two levels
     }
 
@@ -126,7 +142,7 @@ public class RocketShip : MonoBehaviour {
         rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);   // use relative force so when rocket tilts force tilts as well
         if (!audioSource.isPlaying)
         {
-            audioSource.PlayOneShot(mainEngine);
+            audioSource.PlayOneShot(mainEngineSound);
         }
         mainEngineParticles.Play();
     }

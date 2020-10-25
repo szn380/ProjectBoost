@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour {
     AudioSource audioSource;
+    [SerializeField] AudioClip explosionSound;
 
     // Use this for initialization
     void Start () {
@@ -16,7 +17,7 @@ public class Explosion : MonoBehaviour {
         {
             case "Friendly":    // do nothing
                 print("Obstacle Collision - Audio");
-                audioSource.Play();
+                audioSource.PlayOneShot(explosionSound);
                 break;
             default:
                 print("Obstacle Collision - No Audio");

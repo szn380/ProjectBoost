@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Title Scene.unity
+    guid: 39421e13fcd7e7e47b6068f8ae3ac61a
+  - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
@@ -27,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 6.unity
     guid: 42a4be433777fb349a4925227853414f
   - enabled: 1
-    path: Assets/Scenes/Level 8.unity
-    guid: f011a76756979c24c882a0b2586bae11
+    path: Assets/Scenes/Flying Saucer.unity
+    guid: a5c413fad86034943a87f9179e3bf272
+  - enabled: 1
+    path: Assets/Scenes/Final Scene.unity
+    guid: 6371e21cd4f6e9541a05277d823758da
   m_configObjects: {}
