@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 8427141603478759472}
   - component: {fileID: 8427141603478759479}
   - component: {fileID: 8427141603478759478}
+  - component: {fileID: 8303092012022370554}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -227,5 +228,18 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.21
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &8303092012022370554
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8427141603478759476}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8408759, y: 0.8408759, z: 0.8408759}
+  m_Center: {x: -0.03478515, y: -0.037223317, z: 0.0075533986}

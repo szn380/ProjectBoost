@@ -16,11 +16,11 @@ public class Explosion : MonoBehaviour {
         switch (collision.gameObject.tag)
         {
             case "Friendly":    // do nothing
-                print("Obstacle Collision - Audio");
-                audioSource.PlayOneShot(explosionSound);
+                print("EXP Obstacle Collision - Audio");
+                // audioSource.PlayOneShot(explosionSound);
                 break;
             default:
-                print("Obstacle Collision - No Audio");
+                print("EXP Obstacle Collision - No Audio");
                 break;
         }
     }

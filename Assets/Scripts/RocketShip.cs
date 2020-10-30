@@ -40,6 +40,10 @@ public class RocketShip : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene(0);
+        }
         if (state == State.Alive)
         {
             if (Debug.isDebugBuild)
@@ -117,7 +121,20 @@ public class RocketShip : MonoBehaviour {
     {
         int sceneCounter = SceneManager.GetActiveScene().buildIndex;
         int sceneMax = SceneManager.sceneCountInBuildSettings;
+        int sceneMaxFlightSchool = SceneManager.sceneCountInBuildSettings;
+        GameData.playerFinalLevel = SceneManager.GetActiveScene().buildIndex;
         sceneCounter++;
+        if (GameData.flightSchool)
+        {
+            if (sceneCounter > sceneMaxFlightSchool)
+            {
+                SceneManager.LoadScene(sceneCounter-1);
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneCounter);
+            }
+        }
         if (sceneCounter >= sceneMax) { sceneCounter = 0;  }
         SceneManager.LoadScene(sceneCounter);  // todo: allow for more than two levels
     }
