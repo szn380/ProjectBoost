@@ -5,32 +5,57 @@ using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 using System.Runtime.Serialization.Formatters;
 using UnityEngine.UI;
+using TMPro;
 
 public class Restart : MonoBehaviour
 {
-    public InputField iField;
+    public TMP_InputField iField;
     string playerInitials;
 
     private void Start()
     {
-        iField.onEndEdit.AddListener(delegate { inputIField(iField); });
+        if (iField != null)
+        {
+            iField.text = "Enter Initials";
+        }
+        else
+        {
+            print("ERROR with TMP iField: is null on Start()");
+        }
     }
 
-    public void inputIField(InputField userInput)
+    public void processTextBox()
     {
-        print("Input Field " + userInput.text);
-        GameData.addPlayer = true;
-        GameData.playerInitials = userInput.text;
+        if (iField != null)
+        {
+            print("Input Field " + iField.text);
+            GameData.addPlayer = true;
+            GameData.playerInitials = iField.text;
+        }
+        else
+        {
+            print("ERROR with TMP iField: is null on processTextBox()");
+        }
+
     }
 
-    void Update()
+    public void inputIField(TMP_InputField userInput)  // TBD delme
+    {
+        // print("Input Field " + userInput.text);
+        //GameData.addPlayer = true;
+        //GameData.playerInitials = userInput.text;
+    }
+
+    void Update()  // TBD delme
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene(1);
+            // SceneManager.LoadScene(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Q)) {
-            SceneManager.LoadScene(0);
-        }
+    }
+
+    public void processMainMenuButton()
+    {
+        SceneManager.LoadScene(0);
     }
 }

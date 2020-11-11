@@ -18,6 +18,7 @@ public class TitleNext : MonoBehaviour
     {
         if (GameData.addPlayer)
         {
+            print("Updating Top Score List");
             updateTopScoreList();
         }
         print("Refresh UI Scores");
@@ -46,7 +47,7 @@ public class TitleNext : MonoBehaviour
     }
 
     // Sort the players scores / initials into the top game list
-    private static void updateTopScoreList()
+    private void updateTopScoreList()
     {
         int i = 0;
         string savedInitials, savedInitials1;
@@ -86,36 +87,44 @@ public class TitleNext : MonoBehaviour
     // Check for user input requesting to launch or quit game
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))  // Check to launch Play for Score Mode
-        {
-            int sceneCounter = SceneManager.GetActiveScene().buildIndex + 1;
-            GameData.flightSchool = false;
-            SceneManager.LoadScene(sceneCounter);
-        }
-        if (Input.GetKeyDown(KeyCode.F))  // Check to launch Flight School Mode
-        {
-            GameData.flightSchool = true;
-            SceneManager.LoadScene(GameData.getInitialsLevelNum+1);
-        }
-        if (Input.GetKeyDown(KeyCode.Q))  // Check to quit game
-        {
-            writeTopScoresToFile();
-            Application.Quit();
-        }
-
         if (Input.GetKeyDown(KeyCode.Delete))  // Reset top score list
         {
-            print("Reset Scores");
-            for (int i=0; i<10; i++ )
-            {
-                GameData.playerLevel[i] = 0;
-                GameData.playerNames[i] = "---";
-                updateUITopScoreList();
-            }
+            restTopScores();
         }
     }
 
-    private static void writeTopScoresToFile()
+    private void restTopScores()
+    {
+        print("Reset Scores");
+        for (int i = 0; i < 10; i++)
+        {
+            GameData.playerLevel[i] = 0;
+            GameData.playerNames[i] = "---";
+            updateUITopScoreList();
+            writeTopScoresToFile();
+        }
+    }
+
+    public void processPlayForScoreButton()
+    {
+        int sceneCounter = SceneManager.GetActiveScene().buildIndex + 1;
+        GameData.flightSchool = false;
+        SceneManager.LoadScene(sceneCounter);
+    }
+
+    public void processFlightSchoolButton()
+    {
+        GameData.flightSchool = true;
+        SceneManager.LoadScene(GameData.getInitialsLevelNum + 1);
+    }
+
+    public void processQuitButton()
+    {
+        writeTopScoresToFile();
+        Application.Quit();
+    }
+
+    private void writeTopScoresToFile()
     {
         string path = @"c:\Temp\TopScores.txt";
         if (!File.Exists(path))

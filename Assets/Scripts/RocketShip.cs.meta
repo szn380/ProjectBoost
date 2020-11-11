@@ -3,7 +3,13 @@ guid: 971074c50723ed44899fed5c0fc25187
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mainEngineSound: {instanceID: 0}
+  - finishLevelSound: {instanceID: 0}
+  - mainEngineParticles: {fileID: 198100719057022332, guid: a3553fd250eb92d4091bebde350c6739,
+      type: 3}
+  - finishLevelParticles: {instanceID: 0}
+  - RocketShipExplosion: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

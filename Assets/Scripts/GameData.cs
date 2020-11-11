@@ -49,7 +49,15 @@ public class GameData : MonoBehaviour
                 {
                     string[] textFields = line.Split(' ');
                     playerLevel[i] = int.Parse(textFields[0]);                    
-                    playerNames[i] = textFields[1];                    i++;
+                    playerNames[i] = textFields[1]; 
+                    if (textFields.Length > 2)  // handle spaces in text line 
+                    {
+                        for (int j=2; j<textFields.Length; j++ )
+                        {
+                            playerNames[i] = playerNames[i] + " " + textFields[j];
+                        }
+                    }
+                    i++;
                 }
             }
         }
